@@ -19,7 +19,7 @@
                 <input name="postcode" oninput="getSuggestion(event)"
                     placeholder="Type here ..." id="postcode"
                     type="text">
-                <ul class="autocomplete stack" style="display: none">
+                <ul class="autocomplete stack" onfocusout="hideAutocomplete()" style="display: none">
                 </ul>
                 <button type="submit"> How warm is it outside? </button>
             </form>

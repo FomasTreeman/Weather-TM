@@ -22,8 +22,9 @@ const getSuggestion = (inputElement) => {
     .then((resp) => resp.json())
     .then((json) => {
       if (json.result === null) {
-        throw new Error("starting characters have no similar postcodes");
-      } else return json.result;
+        hideAutocomplete()
+        throw new Error("starting characters have no similar postcodes")
+      } else return json.result
     })
     .then((result) => {
       ulElement.innerHTML = "";
