@@ -4,21 +4,43 @@ body {
   width: 100%;
 }
 
+* { font-family: 'Poppins'; }
+
+/* using local font rather than making another request */
+@font-face {
+  font-family: "Poppins";
+  src: url("Poppins-Regular.ttf") format("truetype");
+}
+
 .stack > * + * {
   margin-top: 1rem;
 }
 
+.stack-sm > * + * {
+  margin-top: 0.4rem;
+}
+
 .autocomplete {
-    position: absolute;
-    /* needs changin */
-    left: 3rem;
-    z-index: 10;
-    background-color: darkslategrey;
-    opacity: 0.95;
-    padding: 1.5rem;
-    border-radius: 3px;
+  position: absolute;
+  /* needs changin */
+  left: 3rem;
+  z-index: 10;
+  background-color: rgb(131, 155, 155);
+  opacity: 0.95;
+  padding: 0.5rem;
+  border-radius: 3px;
 }
 
 .autocomplete > * {
-    list-style-type: none
+  list-style-type: none;
+}
+
+.autocomplete li > button {
+  border: none;
+  background-color: inherit;
+  width: 10ch;
+}
+
+.autocomplete li > button:hover {
+  color: blanchedalmond;
 }
