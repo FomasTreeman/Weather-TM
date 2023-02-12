@@ -1,7 +1,6 @@
 const getTemp = (e) => {
   e.preventDefault();
   let value = e.target[0].value.replaceAll(" ", "");
-
 //   refactor this.
   fetch(`https://api.postcodes.io/postcodes/${value}/validate`)
     .then((resp) => resp.json())
@@ -33,11 +32,9 @@ const getSuggestion = (inputElement) => {
   let searchValue = inputElement.target.value;
   ulElement.style.display = searchValue == "" ? "none" : "block";
   if (!searchValue) return;
-  console.log(searchValue)
   fetch(`https://api.postcodes.io/postcodes/${searchValue}/autocomplete`)
     .then((resp) => resp.json())
     .then((json) => {
-        console.log(json.result)
       if (json.result === null) {
         hideAutocomplete();
         throw new Error("starting characters have no similar postcodes");
@@ -66,6 +63,12 @@ const setSearchValue = (newValue) => {
 };
 
 const hideAutocomplete = () => {
-  console.log("hide");
+  // console.log("hide");
   document.querySelector("ul").style.display = "none";
 };
+
+// closest searches hole dom to find nearest ancestor or just that element. if it isnt that element beign compraed it returns null
+document.addEventListener('click', (event) => {
+  const ulDisplay = document.querySelector('ul').style.display
+  if (!event.target.closest('.autocomplete') && ulDisplay != 'none') hideAutocomplete()
+})
