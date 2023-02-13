@@ -1,8 +1,7 @@
 /* * GLOBAL */
-
-html {
-  height: 100%;
-  width: 100%;
+body {
+  background-color: #292e2d;
+  color: #d1bd9e;  
 }
 
 * {
@@ -43,6 +42,10 @@ html {
 }
 
 /* ? || GENERAL || */
+
+.text-center {
+  text-align: center;
+}
 
 .center {
   max-width: 21rem;
