@@ -33,12 +33,12 @@ const getTemp = (e) => {
 
 const selectImage = (weatherCode) => {
   const sectionElement = document.querySelector("#results");
-  const lastDesc = sectionElement.lastChild;
+  const firstDesc = sectionElement.firstChild;
   // refactor
-  if (lastDesc.tagName == "IMG") {
-    const prevCode = lastDesc.src.split("/").pop().slice(0, -4);
+  if (firstDesc.tagName == "IMG") {
+    const prevCode = firstDesc.src.split("/").pop().slice(0, -4);
     if (weatherCode != prevCode) {
-      lastDesc.remove();
+      firstDesc.remove();
       const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
       sectionElement.innerHTML += imgElement;
     }

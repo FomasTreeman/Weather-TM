@@ -55,6 +55,11 @@ body {
   flex-wrap: wrap;
 }
 
+.flex__col {
+  display: flex;
+  flex-direction: column;
+}
+
 .align-center {
   align-items: center;
 }
@@ -87,6 +92,11 @@ body {
 
 #week {
   padding: 0;
+  align-content: stretch;
+}
+
+#week > * {
+  margin: 0.3em;
 }
 
 #postcodeForm {
