@@ -9,29 +9,53 @@
         <title>Weather app</title>
     </head>
     <body class="stack">
-        <header>
-            <h1> Weather Forecast </h1>
+        <header class="flex space-between">
+            <h1> Weather </h1>
+            <button onclick="togglePostcodeForm()"> Postcode </button>
         </header>
-        <main>
-            <section id="results" class="flex align-center flex-end">
-                <h2 id="curr_temp"> </h2>
-            </section>
-            <form action="" onsubmit="getTemp(event)" class="center">
+        <main class="stack">
+            <form id="postcodeForm" action="" onsubmit="getTemp(event)"
+                class="center card" style="display: none;">
                 <label for="postcode"> Postcode: </label>
                 <br>
                 <input name="postcode" oninput="getSuggestion(event)"
                     placeholder="Type here ..." id="postcode"
                     type="text"
                     autocomplete="off">
-                <ul class="autocomplete stack stack-sm"  style="display: none">
+                <ul class="autocomplete stack stack-sm" style="display: none">
                 </ul>
-                <button type="submit"> How warm is it outside? </button>
+                <button type="submit"> This is me </button>
             </form>
+            <section id="results" class="flex align-center flex-end">
+                <h2 id="curr_temp"> </h2>
+            </section>
+            <ul id="week" class="flex__col">
+                <li class="card day text-center">
+                    Mon
+                </li>
+                <li class="card day text-center">
+                    Tue
+                </li>
+                <li class="card day text-center">
+                    Wed
+                </li>
+                <li class="card day text-center">
+                    Thur
+                </li>
+                <li class="card day text-center">
+                    Fri
+                </li>
+                <li class="card day" text-center>
+                    Sat
+                </li>
+                <li class="card day text-center">
+                    Sun
+                </li>
+            </ul>
             <h2> World Weather </h2>
         </main>
         <footer>
-            <p>Tom x Muhammad © </p>
-            <!-- <a href="https://www.flaticon.com/free-icons/weather" title="weather icons">Weather icons created by Freepik - Flaticon</a> -->
+            <p class="text-center">Tom x Muhammad © </p>
         </footer>
         <script src="script.js"></script>
     </body>
