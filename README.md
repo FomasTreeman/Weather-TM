@@ -44,6 +44,6 @@ As a user i want to be able to..
 
 1. Clone the repo into vscode using 
 ```
-git clone https://github.com/fac27/FAC-webAgency/
+git clone https://github.com/fac27/Weather-TM/
 ```
 2. Launch the site using the [vscode liveserver extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
