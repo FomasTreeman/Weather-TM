@@ -1,7 +1,6 @@
 const getTemp = (e) => {
   e.preventDefault();
   let value = e.target[0].value.replaceAll(" ", "");
-  //   refactor this.
   fetch(`https://api.postcodes.io/postcodes/${value}/validate`)
     .then((resp) => resp.json())
     .then((json) => {
@@ -25,25 +24,27 @@ const getTemp = (e) => {
     .then((temp) => {
       document.getElementById("curr_temp").innerHTML = temp + " °C";
       hideAutocomplete();
+      togglePostcodeForm();
+      successPostcode();
     })
-    // improve error handling to give user feedback
+    // TODO improve error handling to give user feedback
     .catch(console.error);
 };
 
 const selectImage = (weatherCode) => {
   const sectionElement = document.querySelector("#results");
-  const lastDesc = sectionElement.lastChild;
+  const firstDesc = sectionElement.firstChild;
   // refactor
-  if (lastDesc.tagName == "IMG") {
-    const prevCode = lastDesc.src.split("/").pop().slice(0, -4);
+  if (firstDesc.tagName == "IMG") {
+    const prevCode = firstDesc.src.split("/").pop().slice(0, -4);
     if (weatherCode != prevCode) {
-      lastDesc.remove();
+      firstDesc.remove();
       const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
       sectionElement.innerHTML += imgElement;
     }
   } else {
     const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
-      sectionElement.innerHTML += imgElement;
+    sectionElement.innerHTML += imgElement;
   }
 };
 
@@ -70,6 +71,7 @@ const getSuggestion = (inputElement) => {
         buttonElement.setAttribute("type", "button");
         liElement.appendChild(buttonElement);
         ulElement.appendChild(liElement);
+        checkClickOutside(".autocomplete", "ul", hideAutocomplete);
       });
     })
     .catch(console.error);
@@ -82,14 +84,34 @@ const setSearchValue = (newValue) => {
   hideAutocomplete();
 };
 
+const successPostcode = () => {
+  let postcode = document.querySelector("input[type=text]").value;
+  document.querySelector("header > button").innerHTML = postcode;
+};
+
+// const showPostcodeForm = () => {
+//   document.getElementById("postcodeForm").style.display = "block";
+//   // checkClickOutside("form", "#postcodeForm", hidePostcodeForm);
+// };
+
+// const hidePostcodeForm = () => {
+//   document.getElementById("postcodeForm").style.display = "none";
+// };
+
+const togglePostcodeForm = () => {
+  let display = document.getElementById("postcodeForm").style.display;
+  document.getElementById("postcodeForm").style.display =
+    display == "none" ? "block" : "none";
+};
+
 const hideAutocomplete = () => {
-  // console.log("hide");
   document.querySelector("ul").style.display = "none";
 };
 
 // closest searches hole dom to find nearest ancestor or just that element. if it isnt that element beign compraed it returns null
-document.addEventListener("click", (event) => {
-  const ulDisplay = document.querySelector("ul").style.display;
-  if (!event.target.closest(".autocomplete") && ulDisplay != "none")
-    hideAutocomplete();
-});
+const checkClickOutside = (closeSelector, hiddenEl, func) => {
+  document.addEventListener("click", (event) => {
+    const ulDisplay = document.querySelector(hiddenEl).style.display;
+    if (!event.target.closest(closeSelector) && ulDisplay != "none") func();
+  });
+};

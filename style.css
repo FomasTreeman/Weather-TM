@@ -1,16 +1,44 @@
-html,
-body {
-  height: 100%;
-  width: 100%;
+/* * GLOBAL */
+
+:root {
+  --primary-colour: blue;
+  --secondary-colour: red;
+  --text-colour: yellow;
 }
 
-* { font-family: 'Poppins'; }
+body {
+  background-color: #292e2d;
+  color: #d1bd9e;  
+  margin: 1.5em;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
 
 /* using local font rather than making another request */
 @font-face {
   font-family: "Poppins";
   src: url("Poppins-Regular.ttf") format("truetype");
 }
+
+/* * NON-SPECIFIC PRIMITIVES */
+
+/* ~?|| CARD ||  */
+
+.card {
+  background-color: rgb(36, 36, 39);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+}
+
+.day {
+  width: 5rem;
+  height: 8rem;
+}
+
+/* ~?|| STACK ||  */
 
 .stack > * + * {
   margin-top: 1rem;
@@ -20,22 +48,74 @@ body {
   margin-top: 0.4rem;
 }
 
+/* ? || FLEX || */
+
 .flex {
-    display: flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex__col {
+  display: flex;
+  flex-direction: column;
 }
 
 .align-center {
-    align-items: center;
+  align-items: center;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+
 .flex-end {
-    justify-content: flex-end;
+  justify-content: flex-end;
+}
+
+/* ? || GENERAL || */
+
+.text-center {
+  text-align: center;
 }
 
 .center {
-    max-width: 21rem;
-    margin-inline: auto;
+  max-width: 21rem;
+  margin-inline: auto;
 }
+
+/* * SPECIFIC PRIMITIVES */
+
+#week {
+  padding: 0;
+  align-content: stretch;
+}
+
+#week > * {
+  margin: 0.3em;
+}
+
+#postcodeForm {
+  position: absolute;
+  width: 18rem;
+  left: 0;
+  right: 0;
+}
+
+li {
+  list-style: none;
+}
+
+header > button {
+  max-height: 2em;
+  align-self: center;
+}
+
+/* ? || AUTO || */
 
 .autocomplete {
   position: absolute;
