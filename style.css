@@ -1,7 +1,15 @@
 /* * GLOBAL */
+
+:root {
+  --primary-colour: blue;
+  --secondary-colour: red;
+  --text-colour: yellow;
+}
+
 body {
   background-color: #292e2d;
   color: #d1bd9e;  
+  margin: 1.5em;
 }
 
 * {
@@ -17,6 +25,19 @@ body {
 
 /* * NON-SPECIFIC PRIMITIVES */
 
+/* ~?|| CARD ||  */
+
+.card {
+  background-color: rgb(36, 36, 39);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+}
+
+.day {
+  width: 5rem;
+  height: 8rem;
+}
+
 /* ~?|| STACK ||  */
 
 .stack > * + * {
@@ -31,11 +52,21 @@ body {
 
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .align-center {
   align-items: center;
 }
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
 
 .flex-end {
   justify-content: flex-end;
@@ -53,6 +84,26 @@ body {
 }
 
 /* * SPECIFIC PRIMITIVES */
+
+#week {
+  padding: 0;
+}
+
+#postcodeForm {
+  position: absolute;
+  width: 18rem;
+  left: 0;
+  right: 0;
+}
+
+li {
+  list-style: none;
+}
+
+header > button {
+  max-height: 2em;
+  align-self: center;
+}
 
 /* ? || AUTO || */
 

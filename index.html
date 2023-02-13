@@ -9,14 +9,13 @@
         <title>Weather app</title>
     </head>
     <body class="stack">
-        <header>
-            <h1> Weather Forecast </h1>
+        <header class="flex space-between">
+            <h1> Weather </h1>
+            <button onclick="togglePostcodeForm()"> Postcode </button>
         </header>
         <main class="stack">
-            <section id="results" class="flex align-center flex-end">
-                <h2 id="curr_temp"> </h2>
-            </section>
-            <form action="" onsubmit="getTemp(event)" class="center">
+            <form id="postcodeForm" action="" onsubmit="getTemp(event)"
+                class="center card" style="display: none;">
                 <label for="postcode"> Postcode: </label>
                 <br>
                 <input name="postcode" oninput="getSuggestion(event)"
@@ -25,8 +24,34 @@
                     autocomplete="off">
                 <ul class="autocomplete stack stack-sm" style="display: none">
                 </ul>
-                <button type="submit"> How warm is it outside? </button>
+                <button type="submit"> This is me </button>
             </form>
+            <section id="results" class="flex align-center flex-end">
+                <h2 id="curr_temp"> </h2>
+            </section>
+            <ul id="week" class="flex space-around">
+                <li class="card day">
+                    Mon
+                </li>
+                <li class="card day">
+                    Tue
+                </li>
+                <li class="card day">
+                    Wed
+                </li>
+                <li class="card day">
+                    Thur
+                </li>
+                <li class="card day">
+                    Fri
+                </li>
+                <li class="card day">
+                    Sat
+                </li>
+                <li class="card day">
+                    Sun
+                </li>
+            </ul>
             <h2> World Weather </h2>
         </main>
         <footer>
