@@ -1,7 +1,6 @@
 const getTemp = (e) => {
   e.preventDefault();
   let value = e.target[0].value.replaceAll(" ", "");
-  //   refactor this.
   fetch(`https://api.postcodes.io/postcodes/${value}/validate`)
     .then((resp) => resp.json())
     .then((json) => {
@@ -26,7 +25,7 @@ const getTemp = (e) => {
       document.getElementById("curr_temp").innerHTML = temp + " °C";
       hideAutocomplete();
     })
-    // improve error handling to give user feedback
+    // TODO improve error handling to give user feedback
     .catch(console.error);
 };
 
@@ -83,7 +82,6 @@ const setSearchValue = (newValue) => {
 };
 
 const hideAutocomplete = () => {
-  // console.log("hide");
   document.querySelector("ul").style.display = "none";
 };
 
