@@ -20,6 +20,23 @@ body {
   margin-top: 0.4rem;
 }
 
+.flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.center {
+    max-width: 21rem;
+    margin-inline: auto;
+}
+
 .autocomplete {
   position: absolute;
   /* needs changin */

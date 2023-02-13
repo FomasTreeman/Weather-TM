@@ -1,7 +1,7 @@
 const getTemp = (e) => {
   e.preventDefault();
   let value = e.target[0].value.replaceAll(" ", "");
-//   refactor this.
+  //   refactor this.
   fetch(`https://api.postcodes.io/postcodes/${value}/validate`)
     .then((resp) => resp.json())
     .then((json) => {
@@ -18,13 +18,33 @@ const getTemp = (e) => {
       )
     )
     .then((res) => res.json())
-    .then((json) => json.current_weather.temperature)
+    .then((json) => {
+      selectImage(json.current_weather.weathercode);
+      return json.current_weather.temperature;
+    })
     .then((temp) => {
-      document.getElementById("curr_temp").innerHTML = temp + " C";
+      document.getElementById("curr_temp").innerHTML = temp + " °C";
       hideAutocomplete();
     })
     // improve error handling to give user feedback
     .catch(console.error);
+};
+
+const selectImage = (weatherCode) => {
+  const sectionElement = document.querySelector("#results");
+  const lastDesc = sectionElement.lastChild;
+  // refactor
+  if (lastDesc.tagName == "IMG") {
+    const prevCode = lastDesc.src.split("/").pop().slice(0, -4);
+    if (weatherCode != prevCode) {
+      lastDesc.remove();
+      const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
+      sectionElement.innerHTML += imgElement;
+    }
+  } else {
+    const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
+      sectionElement.innerHTML += imgElement;
+  }
 };
 
 const getSuggestion = (inputElement) => {
@@ -53,7 +73,7 @@ const getSuggestion = (inputElement) => {
       });
     })
     .catch(console.error);
-}
+};
 
 const setSearchValue = (newValue) => {
   console.log(newValue);
@@ -68,7 +88,8 @@ const hideAutocomplete = () => {
 };
 
 // closest searches hole dom to find nearest ancestor or just that element. if it isnt that element beign compraed it returns null
-document.addEventListener('click', (event) => {
-  const ulDisplay = document.querySelector('ul').style.display
-  if (!event.target.closest('.autocomplete') && ulDisplay != 'none') hideAutocomplete()
-})
+document.addEventListener("click", (event) => {
+  const ulDisplay = document.querySelector("ul").style.display;
+  if (!event.target.closest(".autocomplete") && ulDisplay != "none")
+    hideAutocomplete();
+});
