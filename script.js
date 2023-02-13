@@ -1,7 +1,6 @@
 const getTemp = (e) => {
   e.preventDefault();
   let value = e.target[0].value.replaceAll(" ", "");
-  //   refactor this.
   fetch(`https://api.postcodes.io/postcodes/${value}/validate`)
     .then((resp) => resp.json())
     .then((json) => {
@@ -20,10 +19,8 @@ const getTemp = (e) => {
     .then((res) => res.json())
     .then((json) => {
       selectImage(json.current_weather.weathercode);
-      return json.current_weather.temperature;
-    })
-    .then((temp) => {
-      document.getElementById("curr_temp").innerHTML = temp + " °C";
+      document.getElementById("curr_temp").innerHTML =
+        json.current_weather.temperature + " °C";
       hideAutocomplete();
     })
     // improve error handling to give user feedback
@@ -33,18 +30,16 @@ const getTemp = (e) => {
 const selectImage = (weatherCode) => {
   const sectionElement = document.querySelector("#results");
   const lastDesc = sectionElement.lastChild;
-  // refactor
+  const insertIMG = () =>
+    (sectionElement.innerHTML += `<img src="./icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`);
+  // lots of nesting but seemed most efficient after diffrent refatoring attempts
   if (lastDesc.tagName == "IMG") {
     const prevCode = lastDesc.src.split("/").pop().slice(0, -4);
     if (weatherCode != prevCode) {
       lastDesc.remove();
-      const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
-      sectionElement.innerHTML += imgElement;
+      insertIMG();
     }
-  } else {
-    const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
-      sectionElement.innerHTML += imgElement;
-  }
+  } else insertIMG();
 };
 
 const getSuggestion = (inputElement) => {
