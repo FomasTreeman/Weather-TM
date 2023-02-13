@@ -19,10 +19,8 @@ const getTemp = (e) => {
     .then((res) => res.json())
     .then((json) => {
       selectImage(json.current_weather.weathercode);
-      return json.current_weather.temperature;
-    })
-    .then((temp) => {
-      document.getElementById("curr_temp").innerHTML = temp + " °C";
+      document.getElementById("curr_temp").innerHTML =
+        json.current_weather.temperature + " °C";
       hideAutocomplete();
       togglePostcodeForm();
       successPostcode();
@@ -34,18 +32,16 @@ const getTemp = (e) => {
 const selectImage = (weatherCode) => {
   const sectionElement = document.querySelector("#results");
   const firstDesc = sectionElement.firstChild;
-  // refactor
+  const insertIMG = () =>
+    (sectionElement.innerHTML += `<img src="./icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`);
+  // lots of nesting but seemed most efficient after diffrent refatoring attempts
   if (firstDesc.tagName == "IMG") {
     const prevCode = firstDesc.src.split("/").pop().slice(0, -4);
     if (weatherCode != prevCode) {
       firstDesc.remove();
-      const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
-      sectionElement.innerHTML += imgElement;
+      insertIMG();
     }
-  } else {
-    const imgElement = `<img src="/icons/weather-codes/${weatherCode}.svg" alt="weatherIcon">`;
-    sectionElement.innerHTML += imgElement;
-  }
+  } else insertIMG();
 };
 
 const getSuggestion = (inputElement) => {
