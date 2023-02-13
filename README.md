@@ -48,7 +48,7 @@ git clone https://github.com/fac27/Weather-TM/
 ```
 2. Launch the site using the [vscode liveserver extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
-
+---
 ### Other helpful VSCode extensions Used
 
 Colorful comments
