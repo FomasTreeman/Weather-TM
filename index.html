@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather app</title>
-</head>
-<body>
-    <header>
-        <h1> Weather forecast </h1>
-        <h2 id="curr_temp"> </h2>
-        <form action="" onsubmit="getTemp(event)">
-            <label for="city"> Postcode: </label>
-            <br>
-            <input name="city" placeholder="Type here ..." id="city" type="text">
-            <button type="submit"> Submit </button>
-        </form>
-    </header>
-    <script src="script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/icons/favicon.ico">
+        <link rel="stylesheet" href="style.css">
+        <title>Weather app</title>
+    </head>
+    <body class="stack">
+        <header>
+            <h1> Weather Forecast </h1>
+        </header>
+        <main>
+            <section id="results" class="flex align-center flex-end">
+                <h2 id="curr_temp"> </h2>
+            </section>
+            <form action="" onsubmit="getTemp(event)" class="center">
+                <label for="postcode"> Postcode: </label>
+                <br>
+                <input name="postcode" oninput="getSuggestion(event)"
+                    placeholder="Type here ..." id="postcode"
+                    type="text"
+                    autocomplete="off">
+                <ul class="autocomplete stack stack-sm"  style="display: none">
+                </ul>
+                <button type="submit"> How warm is it outside? </button>
+            </form>
+            <h2> World Weather </h2>
+        </main>
+        <footer>
+            <p>Tom x Muhammad © </p>
+            <!-- <a href="https://www.flaticon.com/free-icons/weather" title="weather icons">Weather icons created by Freepik - Flaticon</a> -->
+        </footer>
+        <script src="script.js"></script>
+    </body>
 </html>
