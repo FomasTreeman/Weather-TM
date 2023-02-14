@@ -26,10 +26,15 @@
                 </ul>
                 <button type="submit"> This is me </button>
             </form>
-            <section id="results" class="flex align-center flex-end">
+            <section id="results" class="flex align-center flex-start" style="display: none;">
                 <h2 id="curr_temp"> </h2>
+                <article id="weather-details" >
+                    <h3> Precipitation: </h3>
+                    <h3> Wind: </h3>
+                    <h3> Humidity: </h3>
+                </article>
             </section>
-            <ul id="week" class="flex__col">
+            <ul id="week" class="flex flex--scroll-x" style="display: flex;">
                 <li class="card day text-center">
                     Mon
                 </li>
@@ -52,11 +57,15 @@
                     Sun
                 </li>
             </ul>
-            <h2> World Weather </h2>
+            <section>
+                <h2> World Weather </h2>
+                <ul id="global" class="flex flex__wrap justify-center">
+                </ul>
+            </section>
         </main>
         <footer>
             <p class="text-center">Tom x Muhammad © </p>
         </footer>
-        <script src="script.js"></script>
+        <script src="./script.js"></script>
     </body>
 </html>
