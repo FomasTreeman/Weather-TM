@@ -52,7 +52,15 @@ body {
 
 .flex {
   display: flex;
+  padding: 0;
+}
+
+.flex__wrap {
   flex-wrap: wrap;
+}
+
+.flex--scroll-x {
+  overflow-x: auto;
 }
 
 .flex__col {
@@ -64,6 +72,10 @@ body {
   align-items: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .space-between {
   justify-content: space-between;
 }
@@ -72,6 +84,9 @@ body {
   justify-content: space-around;
 }
 
+.flex-start {
+  justify-content: flex-start;
+}
 
 .flex-end {
   justify-content: flex-end;
@@ -90,6 +105,33 @@ body {
 
 /* * SPECIFIC PRIMITIVES */
 
+#curr_temp {
+  font-size: xx-large;
+}
+
+#weather-details {
+  padding-left: 1.5em;
+}
+
+#weather-details > h3 {
+  margin-block: 0em;
+  font-size: small;
+}
+
+#global > * {
+  max-width: 8rem;
+  margin: 0.5em;
+}
+
+#global > * img {
+  padding-top: 1em;
+}
+
+#global > * p {
+  margin: 0;
+}
+
+
 #week {
   padding: 0;
   align-content: stretch;
@@ -97,6 +139,12 @@ body {
 
 #week > * {
   margin: 0.3em;
+}
+
+.city {
+  /* flex: ~ grow - shrink - basisi */
+  flex: 1 0 auto;
+  margin-inline: 0.2em;
 }
 
 #postcodeForm {
@@ -108,11 +156,16 @@ body {
 
 li {
   list-style: none;
+  padding: 0;
 }
 
 header > button {
   max-height: 2em;
   align-self: center;
+}
+
+#results > img {
+  margin-inline: 0.5rem;
 }
 
 /* ? || AUTO || */
