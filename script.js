@@ -1,5 +1,4 @@
-document.addEventListener("click", handleClick);
-
+// * ------------- fetchers
 async function fetchResult(
   url,
   init,
@@ -15,7 +14,7 @@ async function fetchResult(
   return json.result;
 }
 
-async function fetchTemp(postcode) {
+async function fetchWeather(postcode) {
   try {
     const validateResult = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}/validate`
@@ -23,7 +22,6 @@ async function fetchTemp(postcode) {
     const { longitude, latitude } = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}`
     );
-
     let url = new URL(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`
     );
@@ -37,7 +35,6 @@ async function fetchTemp(postcode) {
 
     const response = await fetch(url + params);
     const json = await response.json();
-    console.log(json);
     return json;
   } catch (error) {
     // TODO improve error handling to give user feedback
@@ -45,73 +42,26 @@ async function fetchTemp(postcode) {
   }
 }
 
-async function handleSubmit(e) {
-  let postcode = e;
-  if (typeof e != "string") {
-    console.log("dispaly current");
-    e.preventDefault();
-    postcode = e.target[0].value;
-  }
-  console.log(e);
-  postcode = postcode.replaceAll(" ", "");
-  console.log(postcode);
-  const json = await fetchTemp(postcode);
-  console.log(json);
-  renderImage(json.current_weather.weathercode);
-  document.getElementById("curr_temp").innerHTML =
-    json.current_weather.temperature + " °C";
-  let hourlyHum = json.hourly.relativehumidity_2m;
-  const humidityAvg =
-    hourlyHum.reduce((acc, curr) => acc + curr) / hourlyHum.length;
-  const details = document.getElementById("weather-details").children;
-  // validate
-  details[0].innerHTML =
-    "Precipitation: " + json.daily.precipitation_sum[0] + "mm";
-  details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
-  details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
-  hide("#results", false);
-  hide("#week", false);
-  hide("#autocomplete");
-  hide("#postcodeForm");
-  document.querySelector("header > button").innerHTML = postcode;
-}
-
-async function renderWeather(postcode, elements, parent) {
-  const json = await fetchTemp(postcode);
-  elements(json).forEach((element) => {
-    parent.appendChild(element);
-  });
-}
-
-const createDailySummaryElements = (json) => {
-  // console.log(json)
-  const iframe = document.createElement("iframe");
-  iframe.src = `./icons/weather-codes/${json.current_weather.weathercode}.svg`;
-  iframe.alt = "weatherIcon";
-  const p = document.createElement("p");
-  p.innerText = json.current_weather.temperature + "°";
-  return [iframe, p];
-};
-
-const renderImage = (weatherCode) => {
-  const sectionElement = document.querySelector("#results");
-  const firstDesc = sectionElement.firstElementChild;
-  const currTemp = document.querySelector("#curr_temp");
-  const insertIMG = () => {
-    const iframe = document.createElement("iframe");
-    iframe.src = `./icons/weather-codes/${weatherCode}.svg`;
-    iframe.alt = "weatherIcon";
-    sectionElement.insertBefore(iframe, currTemp);
+async function fetchPostcode(latitude, longitude) {
+  const body = {
+    geolocations: [
+      {
+        longitude: longitude,
+        latitude: latitude,
+        widesearch: true,
+        limit: 1,
+      },
+    ],
   };
-  // lots of nesting but seemed most efficient after diffrent refatoring attempts
-  if (firstDesc.tagName == "IFRAME") {
-    const prevCode = firstDesc.src.split("/").pop().slice(0, -4);
-    if (weatherCode != prevCode) {
-      firstDesc.remove();
-      insertIMG();
-    }
-  } else insertIMG();
-};
+  const url = "https://api.postcodes.io/postcodes";
+  const result = await fetchResult(url, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: { "content-type": "application/json" },
+  });
+  if (!result[0].result) return null;
+  return result[0].result[0].postcode;
+}
 
 async function fetchAndRenderSuggestion(inputElement) {
   let searchValue = inputElement.target.value.trim();
@@ -142,28 +92,37 @@ async function fetchAndRenderSuggestion(inputElement) {
   }
 }
 
-const renderSearchValue = (newValue) => {
-  console.log(newValue);
-  const inputElement = document.querySelector("input");
-  inputElement.value = newValue;
+// * ------------ event handlers
+async function handleSubmit(e) {
+  let postcode = e;
+  if (typeof e != "string") {
+    e.preventDefault();
+    postcode = e.target[0].value;
+  }
+  postcode = postcode.replaceAll(" ", "");
+  const json = await fetchWeather(postcode);
+  renderImage(json.current_weather.weathercode);
+  document.getElementById("curr_temp").innerHTML =
+    json.current_weather.temperature + " °C";
+  let hourlyHum = json.hourly.relativehumidity_2m;
+  const humidityAvg =
+    hourlyHum.reduce((acc, curr) => acc + curr) / hourlyHum.length;
+  const details = document.getElementById("weather-details").children;
+  // validate
+  details[0].innerHTML =
+    "Precipitation: " + json.daily.precipitation_sum[0] + "mm";
+  details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
+  details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
+  hide("#results", false);
+  hide("#week", false);
   hide("#autocomplete");
-};
+  hide("#postcodeForm");
+  document.querySelector("header > button").innerHTML = postcode;
+}
 
-const togglePostcodeForm = (event) => {
+const handlePostcodeFormSubmit = (event) => {
   event.stopPropagation(); //prevent document.click running
   toggle("#postcodeForm");
-};
-
-const toggle = (selector, classname = "hidden") => {
-  document.querySelector(selector).classList.toggle(classname);
-};
-
-const hide = (selector, hidden = true) => {
-  if (hidden) {
-    document.querySelector(selector).classList.add("hidden");
-  } else {
-    document.querySelector(selector).classList.remove("hidden");
-  }
 };
 
 // closest searches hole dom to find nearest ancestor or just that element. if it isnt that element beign compraed it returns null
@@ -181,6 +140,40 @@ function handleClick(event) {
   hideElement("#autocomplete") || hideElement("#postcodeForm"); // js stops on first thing that returns true when using ||
 }
 
+// *  --------------- renderers
+const renderImage = (weatherCode) => {
+  const sectionElement = document.querySelector("#results");
+  const firstDesc = sectionElement.firstElementChild;
+  const currTemp = document.querySelector("#curr_temp");
+  const insertIFRAME = () => {
+    const iframe = document.createElement("iframe");
+    iframe.src = `./icons/weather-codes/${weatherCode}.svg`;
+    iframe.alt = "weatherIcon";
+    sectionElement.insertBefore(iframe, currTemp);
+  };
+  // lots of nesting but seemed most efficient after diffrent refatoring attempts
+  if (firstDesc.tagName == "IFRAME") {
+    const prevCode = firstDesc.src.split("/").pop().slice(0, -4);
+    if (weatherCode != prevCode) {
+      firstDesc.remove();
+      insertIFRAME();
+    }
+  } else insertIFRAME();
+};
+
+const renderSearchValue = (newValue) => {
+  const inputElement = document.querySelector("input");
+  inputElement.value = newValue;
+  hide("#autocomplete");
+};
+
+async function renderWeatherInformation(postcode, elements, parent) {
+  const json = await fetchWeather(postcode);
+  elements(json).forEach((element) => {
+    parent.appendChild(element);
+  });
+}
+
 async function renderWorldWeather() {
   const cityElements = document.getElementsByClassName("city");
   let randomCities = {};
@@ -196,8 +189,7 @@ async function renderWorldWeather() {
   )) {
     const li = `<li class="card city text-center flex__col"> <p> ${key} </p> </li>`;
     global.innerHTML += li;
-    console.log(key, value, index);
-    await renderWeather(
+    await renderWeatherInformation(
       value,
       createDailySummaryElements,
       global.children[index]
@@ -205,29 +197,111 @@ async function renderWorldWeather() {
   }
 }
 
-renderWorldWeather();
+function renderChart() {
+  console.log("rendering");
+  const data = new google.visualization.DataTable();
+  data.addColumn("string", "Temperature");
+  data.addColumn("number", "Hour");
+  data.addColumn({ type: "string", role: "annotation" });
+  data.addRows([
+    ["00:00", 2.7, null],
+    ["01:00", 3.2, "a"],
+    ["02:00", 3.4, null],
+    ["03:00", 4.5, "a"],
+    ["04:00", 4.6, null],
+    ["05:00", 5.1, "a"],
+    ["06:00", 5.1, null],
+    ["07:00", 4.8, "a"],
+    ["08:00", 4.8, null],
+    ["09:00", 4.9, "a"],
+    ["10:00", 5.0, null],
+    ["11:00", 5.1, "a"],
+    ["12:00", 5.2, null],
+    ["13:00", 5.3, "a"],
+    ["14:00", 5.1, null],
+    ["15:00", 4.9, "a"],
+    ["16:00", 4.7, null],
+    ["18:00", 4.6, "a"],
+    ["19:00", 4.5, null],
+    ["20:00", 4.3, "a"],
+    ["21:00", 3.7, null],
+    ["22:00", 3.6, "a"],
+    ["23:00", 3.5, null],
+  ]);
 
-async function fetchPostcode(latitude, longitude) {
-  const body = {
-    geolocations: [
-      {
-        longitude: longitude,
-        latitude: latitude,
-        widesearch: true,
-        limit: 1,
+  const textColour = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--text-colour");
+  console.log(textColour);
+
+  let options = {
+    // forceIFrame: true,
+    width: 327,
+    height: 130,
+    backgroundColor: "transparent",
+    colors: ["orange"],
+    annotations: {
+      stemColor: "none",
+      textStyle: {
+        color: "#d1bd9e",
       },
-    ],
+    },
+    vAxis: {
+      minValue: 0,
+      gridlines: {
+        color: "transparent",
+      },
+      textStyle: {
+        color: "none",
+      },
+    },
+    hAxis: {
+      showTextEvery: 4,
+      textStyle: {
+        // ! cant use variable text-colour ?
+        color: `#d1bd9e`,
+      },
+    },
+    legend: "none",
   };
-  const url = "https://api.postcodes.io/postcodes";
-  const result = await fetchResult(url, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: { "content-type": "application/json" },
-  });
-  if (!result[0].result) return null;
-  return result[0].result[0].postcode;
+
+  let chart = new google.visualization.AreaChart(
+    document.getElementById("chart_div")
+  );
+  chart.draw(data, options);
 }
 
+// * ------------- data manipulation
+const createDailySummaryElements = (json) => {
+  // (json)
+  const iframe = document.createElement("iframe");
+  iframe.src = `./icons/weather-codes/${json.current_weather.weathercode}.svg`;
+  iframe.alt = "weatherIcon";
+  const p = document.createElement("p");
+  p.innerText = json.current_weather.temperature + "°";
+  return [iframe, p];
+};
+
+// TODO
+function populateDaysOfWeek() {
+  const weekElement = doucment.getElementById("#week");
+  console.log(Array.from(weekElement));
+}
+
+// * --------------- class togglers
+const toggle = (selector, classname = "hidden") => {
+  document.querySelector(selector).classList.toggle(classname);
+};
+
+const hide = (selector, hidden = true) => {
+  if (hidden) {
+    document.querySelector(selector).classList.add("hidden");
+  } else {
+    document.querySelector(selector).classList.remove("hidden");
+  }
+};
+
+// * -------------- handle getting users locaiton on start up
 async function handlePosition(location) {
   const { latitude, longitude } = location.coords;
   const ll = [latitude, longitude];
@@ -239,7 +313,12 @@ async function handlePosition(location) {
 }
 
 function showError(error) {
-  console.log("getCurrentPosition returned error", error);
+  console.error("getCurrentPosition returned error", error);
 }
 
+// ? on reload
+document.addEventListener("click", handleClick);
+renderWorldWeather();
 navigator.geolocation.getCurrentPosition(handlePosition, showError);
+google.charts.load("current", { packages: ["corechart"] });
+google.charts.setOnLoadCallback(renderChart);

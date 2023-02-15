@@ -1,9 +1,9 @@
 /* * GLOBAL */
 
 :root {
-  --primary-colour: blue;
+  --primary-colour: #292e2d;
   --secondary-colour: red;
-  --text-colour: yellow;
+  --text-colour: d1bd9e;
 }
 
 body {

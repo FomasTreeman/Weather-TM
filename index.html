@@ -11,7 +11,7 @@
     <body class="stack">
         <header class="flex space-between">
             <h1> Weather </h1>
-            <button onclick="togglePostcodeForm(event)"> Postcode </button>
+            <button onclick="handlePostcodeFormSubmit(event)"> Postcode </button>
         </header>
         <main class="stack">
             <form id="postcodeForm" action="" onsubmit="handleSubmit(event)"
@@ -36,6 +36,10 @@
                     <h3> Humidity: </h3>
                 </article>
             </section>
+            <!-- temp for graph -->
+            <div id="chart_div">
+
+            </div>
             <ul id="week" class="flex flex--scroll-x hidden">
                 <li class="card day text-center">
                     Mon
@@ -68,6 +72,8 @@
         <footer>
             <p class="text-center">Tom x Muhammad © </p>
         </footer>
-        <script src="script.js"></script>
+        <script type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="script.js"></script>
     </body>
 </html>
