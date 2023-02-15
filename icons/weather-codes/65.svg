@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with weather -->
+<!-- Created with Keyshape -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 64 64" style="white-space: pre;">
-    <path id="_a0" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M6.2,28.1L7.9,26.3" transform="translate(14.9,14.9)"/>
-    <path id="_a1" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M26.3,7.9L28.1,6.2" transform="translate(14.9,14.9)"/>
-    <path id="_a2" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M6.2,6.2L7.9,7.9" transform="translate(14.9,14.9)"/>
-    <path id="_a3" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M26.3,26.3L28.1,28.1" transform="translate(14.9,14.9)"/>
-    <path id="_a4" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M17.1,32.6L17.1,30.1" transform="translate(14.9,14.9)"/>
-    <path id="_a5" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M17.1,4.1L17.1,1.6" transform="translate(14.9,14.9)"/>
-    <path id="_a6" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M1.6,17.1L4.1,17.1" transform="translate(14.9,14.9)"/>
-    <path id="_a7" fill="none" stroke="#FFCE55" stroke-width="3.2903" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M30.1,17.1L32.6,17.1" transform="translate(14.9,14.9)"/>
-    <g transform="translate(14.9,14.9)">
-        <ellipse fill="#FFCE55" rx="8.7" ry="8.7" transform="translate(0,0) translate(17.1,17.1)"/>
+    <g transform="translate(32,27.8455) translate(-20.4509,-16)">
+        <path id="_a0" fill="#99a3aa" d="M32.1,14.2C32.1,14.2,32,14.2,32,14.2C31.1,6.2,24.3,0,16,0C7.2,0,0,7.2,0,16C0,24.8,7.2,32,16,32L32,32C36.9,32,40.9,28,40.9,23.1C41,18.2,37,14.2,32.1,14.2Z" transform="translate(20.4509,16) translate(0,0) translate(-20.4509,-16)"/>
     </g>
-    <g id="_a8" transform="translate(32,32) translate(-17.1,-17.1)">
-        <ellipse fill="#FFAF57" rx="5.7" ry="5.7" transform="translate(0,0) translate(17.1,17.1)"/>
+    <g transform="translate(34.1399,51.0384) translate(-11.7399,-4.112)">
+        <g transform="translate(0.769228,1.51026) translate(-0.730772,-1.51026)">
+            <path id="_a1" fill="none" stroke="#51F4EB" stroke-width="3.6559" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M3.3,1.8L3.3,1.8" opacity="0" transform="translate(-1.83846,-1.8)"/>
+        </g>
+        <g transform="translate(10.9808,1.51026) translate(-0.730772,-1.51026)">
+            <path id="_a2" fill="none" stroke="#51F4EB" stroke-width="3.6559" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M3.3,1.8L3.3,1.8" opacity="0" transform="translate(-1.83846,-1.8)"/>
+        </g>
+        <g transform="translate(21.2491,1.51026) translate(-0.730772,-1.51026)">
+            <path id="_a3" fill="none" stroke="#51F4EB" stroke-width="3.6559" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M3.3,1.8L3.3,1.8" opacity="0" transform="translate(-1.83846,-1.8)"/>
+        </g>
+        <g transform="translate(4.51343,9.73426) translate(-0.730772,-1.51026)">
+            <path id="_a4" fill="none" stroke="#51F4EB" stroke-width="3.6559" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M3.3,1.8L3.3,1.8" opacity="0" transform="translate(-1.83846,-1.8)"/>
+        </g>
+        <g transform="translate(14.725,9.73426) translate(-0.730772,-1.51026)">
+            <path id="_a5" fill="none" stroke="#51F4EB" stroke-width="3.6559" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M3.3,1.8L3.3,1.8" opacity="0" transform="translate(-1.83846,-1.8)"/>
+        </g>
     </g>
     <script><![CDATA[/*
- weather v1.0.0 (c) 2018 Pixofield Ltd | pixofield.com/weather/mit-license */
-window.weather=function(){function A(a){return"undefined"!==typeof a}function v(a,b){return a&&0==a.indexOf(b)}function H(a){if(!isFinite(a))throw Error("Non-finite value");}function Q(a){if(14>=a)return 16;var b=R[a];b||(b=A(ba[a])?0|(a.toLowerCase().indexOf("color")==a.length-5?48:0):1);return b}function J(a){return 0<=a?Math.pow(a,1/3):-Math.pow(-a,1/3)}function ca(a,b,c,d){if(0==a)return 0==b?b=-d/c:(a=Math.sqrt(c*c-4*b*d),d=(-c+a)/(2*b),0<=d&&1>=d?b=d:(d=(-c-a)/(2*b),b=0<=d&&1>=d?d:0)),b;
+ KeyshapeJS v1.0.0 (c) 2018 Pixofield Ltd | pixofield.com/keyshapejs/mit-license */
+window.KeyshapeJS=function(){function A(a){return"undefined"!==typeof a}function v(a,b){return a&&0==a.indexOf(b)}function H(a){if(!isFinite(a))throw Error("Non-finite value");}function Q(a){if(14>=a)return 16;var b=R[a];b||(b=A(ba[a])?0|(a.toLowerCase().indexOf("color")==a.length-5?48:0):1);return b}function J(a){return 0<=a?Math.pow(a,1/3):-Math.pow(-a,1/3)}function ca(a,b,c,d){if(0==a)return 0==b?b=-d/c:(a=Math.sqrt(c*c-4*b*d),d=(-c+a)/(2*b),0<=d&&1>=d?b=d:(d=(-c-a)/(2*b),b=0<=d&&1>=d?d:0)),b;
 var e=c/a-b*b/(a*a)/3;c=b*b*b/(a*a*a)/13.5-b*c/(a*a)/3+d/a;var n=c*c/4+e*e*e/27;b=-b/(3*a);if(0>=n){if(0==e&&0==c)return-J(d/a);a=Math.sqrt(c*c/4-n);d=Math.acos(-c/2/a);c=Math.cos(d/3);d=Math.sqrt(3)*Math.sin(d/3);a=J(a);e=2*a*c+b;if(0<=e&&1>=e)return e;e=-a*(c+d)+b;if(0<=e&&1>=e)return e;e=a*(d-c)+b;if(0<=e&&1>=e)return e}else{a=J(-c/2+Math.sqrt(n));c=J(-c/2-Math.sqrt(n));d=a+c+b;if(0<=d&&1>=d)return d;d=-(a+c)/2+b;if(0<=d&&1>=d)return d}return 0}function da(a,b){if(48==a&&"number"===typeof b)return"#"+
 ("000000"+b.toString(16)).substr(-6);if(64==a)return b=b.map(function(a){return a+"px"}),b.join(",");if(96==a){a="";for(var c=b.length,d=0;d<c;d+=2)a+=b[d],a+=b[d+1].join(",");return a}if(80==a){if(0==b[0])return"none";a="";c=b.length;for(d=0;d<c;)a+=S[b[d]],1==b[d]?a+="("+b[d+1]+") ":5==b[d]?(a+="("+b[d+1]+"px "+b[d+2]+"px "+b[d+3]+"px rgba("+(b[d+4]>>>24)+","+(b[d+4]>>16&255)+","+(b[d+4]>>8&255)+","+(b[d+4]&255)/255+")) ",d+=3):a=2==b[d]?a+("("+b[d+1]+"px) "):7==b[d]?a+("("+b[d+1]+"deg) "):a+("("+
 (0>b[d+1]?0:b[d+1])+") "),d+=2;return a}return 32==a?b+"px":b}function w(a){return 0>=a?0:255<=a?255:a}function ea(a,b,c,d){if(16==a||32==a)return(c-b)*d+b;if(0==a)return.5>d?b:c;if(48==a){if("number"===typeof b&&"number"===typeof c){var e=1-d;return w(e*(b>>16)+d*(c>>16))<<16|w(e*(b>>8&255)+d*(c>>8&255))<<8|w(e*(b&255)+d*(c&255))}return.5>d?b:c}if(64==a){0==b.length&&(b=[0]);0==c.length&&(c=[0]);var n=b.length;b.length!=c.length&&(n=b.length*c.length);var k=[];for(a=0;a<n;++a){var f=b[a%b.length];
@@ -43,17 +49,14 @@ C.push(z)}l[p]=C}else if(48==w)v(l[p],"#")?l[p]=parseInt(l[p].substring(1),16):v
 r=r.substring(F+1).trim();E=r.indexOf("(")}else break;r=z}y[C]=r}else 64==w?"none"!=l[p]?/^[0-9 .]*$/.test(l[p])?l[p]=W(l[p]," "):(console.warn("unsupported value: "+l[p]),l[p]=[0]):l[p]=[0]:32==w?(H(l[p]),l[p]=parseFloat(l[p])):0===D&&(l[p]=parseFloat(l[p]));D=I(h,"e","easing");l=m.length;for(D||(D=[]);D.length<l;)D.push([1,0,0,.58,1]);for(l=0;l<D.length;++l)D[l]=fa(D[l]);q=[g,q,B,u,m,t,D,x];m=I(h,"mp","motionPath");A(m)&&0===g&&(q[8]=[],q[8][0]=h.motionRotate,h=document.createElementNS("http://www.w3.org/2000/svg",
 "path"),m||(m="M0,0"),h.setAttribute("d",m),q[8][1]=h,q[8][2]=h.getTotalLength());k.push(q)}0<k.length&&(c.B.push(e),c.w.push(k))}c.s=b;c.g=0;c.f=c.s;Z(c);return c},add:Z,remove:O,removeAll:function(){for(var a=t.length-1;0<=a;--a)O(t[a]);return this},timelines:function(){return t.slice()},globalPlay:function(){x&&(U=x-(new Date).getTime(),x=void 0,M());return this},globalPause:function(){x||(x=u,N(!1));return this},globalState:function(){return x?"paused":"running"}}}();
 ]]></script>
-    <script><![CDATA[if(weather.version.indexOf('1.')!=0)throw Error('Expected weather v1.*.*');window.ks=document.ks=weather;(function(ks){
-ks.animate("#_a0",[{p:'d',t:[0,1500,3000],v:["path('M6.2,28.1L7.9,26.3')","path('M7.9,26.3L7.9,26.3')","path('M6.2,28.1L7.9,26.3')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a1",[{p:'d',t:[0,1500,3000],v:["path('M26.3,7.9L28.1,6.2')","path('M26.3,7.9L26.3,7.9')","path('M26.3,7.9L28.1,6.2')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a2",[{p:'d',t:[0,1500,3000],v:["path('M6.2,6.2L7.9,7.9')","path('M7.9,7.9L7.9,7.9')","path('M6.2,6.2L7.9,7.9')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a3",[{p:'d',t:[0,1500,3000],v:["path('M26.3,26.3L28.1,28.1')","path('M26.3,26.3L26.3,26.3')","path('M26.3,26.3L28.1,28.1')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a4",[{p:'d',t:[0,1500,3000],v:["path('M17.1,32.6L17.1,30.1')","path('M17.1,30.1L17.1,30.1')","path('M17.1,32.6L17.1,30.1')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a5",[{p:'d',t:[0,1500,3000],v:["path('M17.1,4.1L17.1,1.6')","path('M17.1,4.1L17.1,4.1')","path('M17.1,4.1L17.1,1.6')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a6",[{p:'d',t:[0,1500,3000],v:["path('M1.6,17.1L4.1,17.1')","path('M4.1,17.1L4.1,17.1')","path('M1.6,17.1L4.1,17.1')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a7",[{p:'d',t:[0,1500,3000],v:["path('M30.1,17.1L32.6,17.1')","path('M30.1,17.1L30.1,17.1')","path('M30.1,17.1L32.6,17.1')"],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
-"#_a8",[{p:'scaleX',t:[0,1500,3000],v:[1,0.6,1],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]},{p:'scaleY',t:[0,1500,3000],v:[1,0.6,1],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]}],
+    <script><![CDATA[if(KeyshapeJS.version.indexOf('1.')!=0)throw Error('Expected KeyshapeJS v1.*.*');window.ks=document.ks=KeyshapeJS;(function(ks){
+ks.animate("#_a0",[{p:'mpath',t:[0,1500,3000],v:['0%','50%','100%'],e:[[1,0.445,0.05,0.55,0.95],[1,0.445,0.05,0.55,0.95],[0]],mp:"M20.4509,16L20.4509,10L20.4509,16"}],
+"#_a1",[{p:'opacity',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:[0,1,0,0,1,0,0,1,0],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]},{p:'d',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:["path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')"],e:[[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[0]]}],
+"#_a2",[{p:'opacity',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:[0,1,0,0,1,0,0,1,0],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]},{p:'d',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:["path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')"],e:[[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[0]]}],
+"#_a3",[{p:'opacity',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:[0,1,0,0,1,0,0,1,0],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]},{p:'d',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:["path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')"],e:[[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[0]]}],
+"#_a4",[{p:'opacity',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:[0,1,0,0,1,0,0,1,0],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]},{p:'d',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:["path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')"],e:[[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[0]]}],
+"#_a5",[{p:'opacity',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:[0,1,0,0,1,0,0,1,0],e:[[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[1,0.86,0,0.07,1],[0]]},{p:'d',t:[0,500,900,1000,1500,1900,2000,2500,2900],v:["path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')","path('M3.3,1.8L3.3,1.8')","path('M3.3,1.8L1.8,4.9')","path('M1.8,4.9L1.8,4.9')"],e:[[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[1,0,0,0.175,1],[1,0.77,0,0.175,1],[1,0.77,0,0.175,1],[0]]}],
 {autoremove:false}).range(0,3000).loop(true);
-if(document.location.search.substr(1).split('&').indexOf('global=paused')>=0)ks.globalPause()})(weather);
+if(document.location.search.substr(1).split('&').indexOf('global=paused')>=0)ks.globalPause()})(KeyshapeJS);
 ]]></script>
 </svg>

@@ -17,6 +17,12 @@ body {
   font-family: "Poppins";
 }
 
+iframe {
+  border: none;
+  max-width: 8rem;
+  zoom: 0.6;
+}
+
 /* using local font rather than making another request */
 @font-face {
   font-family: "Poppins";
@@ -66,6 +72,7 @@ body {
 .flex__col {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .align-center {
@@ -127,16 +134,20 @@ body {
 }
 
 #global > * {
-  max-width: 8rem;
+  width: 9rem;
   margin: 0.5em;
 }
 
 #global > * :first-child {
-  margin-top: auto;
+  overflow: hidden;
+  text-overflow: clip;
+  margin-bottom: auto;
 }
 
-#global > * img {
+#global > * iframe {
   padding-top: 1em;
+  flex-grow: 1;
+  align-self: center;
 }
 
 #global > * p {
@@ -155,7 +166,6 @@ body {
 .city {
   /* flex: ~ grow - shrink - basisi */
   flex: 1 0 auto;
-  margin-inline: 0.2em;
 }
 
 #postcodeForm {
@@ -175,8 +185,9 @@ header > button {
   align-self: center;
 }
 
-#results > img {
-  margin-inline: 0.5rem;
+#results > iframe {
+  margin-inline: 1.5rem;
+  zoom: 0.4;
 }
 
 /* ? || AUTO || */
