@@ -11,24 +11,25 @@
     <body class="stack">
         <header class="flex space-between">
             <h1> Weather </h1>
-            <button onclick="togglePostcodeForm()"> Postcode </button>
+            <button onclick="togglePostcodeForm(event)"> Postcode </button>
         </header>
         <main class="stack">
-            <form id="postcodeForm" action="" onsubmit="getTemp(event)"
-                class="center card" style="display: none;">
+            <form id="postcodeForm" action="" onsubmit="handleSubmit(event)"
+                class="center card hidden">
                 <label for="postcode"> Postcode: </label>
                 <br>
-                <input name="postcode" oninput="getSuggestion(event)"
+                <input name="postcode" oninput="fetchAndRenderSuggestion(event)"
                     placeholder="Type here ..." id="postcode"
                     type="text"
                     autocomplete="off">
-                <ul class="autocomplete stack stack-sm" style="display: none">
+                <ul id="autocomplete" class="autocomplete stack stack-sm
+                    hidden">
                 </ul>
                 <button type="submit"> This is me </button>
             </form>
-            <section id="results" class="flex align-center flex-start" style="display: none;">
+            <section id="results" class="flex align-center flex-start hidden">
                 <h2 id="curr_temp"> </h2>
-                <article id="weather-details" >
+                <article id="weather-details">
                     <h3> Precipitation: </h3>
                     <h3> Wind: </h3>
                     <h3> Humidity: </h3>
