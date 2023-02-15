@@ -70,6 +70,7 @@ async function handleSubmit(e) {
   details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
   details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
   hide("#results", false);
+  hide("#week", false);
   hide("#autocomplete");
   hide("#postcodeForm");
   document.querySelector("header > button").innerHTML = postcode;
@@ -84,12 +85,12 @@ async function renderWeather(postcode, elements, parent) {
 
 const createDailySummaryElements = (json) => {
   // console.log(json)
-  const img = document.createElement("img");
-  img.src = `./icons/weather-codes/${json.current_weather.weathercode}.svg`;
-  img.alt = "weatherIcon";
+  const iframe = document.createElement("iframe");
+  iframe.src = `./icons/weather-codes/${json.current_weather.weathercode}.svg`;
+  iframe.alt = "weatherIcon";
   const p = document.createElement("p");
   p.innerText = json.current_weather.temperature + "°";
-  return [img, p];
+  return [iframe, p];
 };
 
 const renderImage = (weatherCode) => {
@@ -97,13 +98,13 @@ const renderImage = (weatherCode) => {
   const firstDesc = sectionElement.firstElementChild;
   const currTemp = document.querySelector("#curr_temp");
   const insertIMG = () => {
-    const img = document.createElement("img");
-    img.src = `./icons/weather-codes/${weatherCode}.svg`;
-    img.alt = "weatherIcon";
-    sectionElement.insertBefore(img, currTemp);
+    const iframe = document.createElement("iframe");
+    iframe.src = `./icons/weather-codes/${weatherCode}.svg`;
+    iframe.alt = "weatherIcon";
+    sectionElement.insertBefore(iframe, currTemp);
   };
   // lots of nesting but seemed most efficient after diffrent refatoring attempts
-  if (firstDesc.tagName == "IMG") {
+  if (firstDesc.tagName == "IFRAME") {
     const prevCode = firstDesc.src.split("/").pop().slice(0, -4);
     if (weatherCode != prevCode) {
       firstDesc.remove();
@@ -193,7 +194,7 @@ async function renderWorldWeather() {
   for (let [index, [key, value]] of Object.entries(
     Object.entries(randomCities)
   )) {
-    const li = `<li class="card city text-center flex__col"> ${key} </li>`;
+    const li = `<li class="card city text-center flex__col"> <p> ${key} </p> </li>`;
     global.innerHTML += li;
     console.log(key, value, index);
     await renderWeather(

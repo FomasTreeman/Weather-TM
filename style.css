@@ -8,13 +8,19 @@
 
 body {
   background-color: #292e2d;
-  color: #d1bd9e;  
+  color: #d1bd9e;
   margin: 1.5em;
 }
 
 * {
   box-sizing: border-box;
   font-family: "Poppins";
+}
+
+iframe {
+  border: none;
+  max-width: 8rem;
+  zoom: 0.6;
 }
 
 /* using local font rather than making another request */
@@ -66,6 +72,7 @@ body {
 .flex__col {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .align-center {
@@ -107,6 +114,10 @@ body {
   margin-inline: auto;
 }
 
+.center-lg {
+  max-width: 40rem;
+}
+
 /* * SPECIFIC PRIMITIVES */
 
 #curr_temp {
@@ -123,18 +134,25 @@ body {
 }
 
 #global > * {
-  max-width: 8rem;
+  width: 9rem;
   margin: 0.5em;
 }
 
-#global > * img {
+#global > * :first-child {
+  overflow: hidden;
+  text-overflow: clip;
+  margin-bottom: auto;
+}
+
+#global > * iframe {
   padding-top: 1em;
+  flex-grow: 1;
+  align-self: center;
 }
 
 #global > * p {
   margin: 0;
 }
-
 
 #week {
   padding: 0;
@@ -148,7 +166,6 @@ body {
 .city {
   /* flex: ~ grow - shrink - basisi */
   flex: 1 0 auto;
-  margin-inline: 0.2em;
 }
 
 #postcodeForm {
@@ -168,8 +185,9 @@ header > button {
   align-self: center;
 }
 
-#results > img {
-  margin-inline: 0.5rem;
+#results > iframe {
+  margin-inline: 1.5rem;
+  zoom: 0.4;
 }
 
 /* ? || AUTO || */

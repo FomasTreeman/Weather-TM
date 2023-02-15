@@ -1,39 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- (c) ammap.com | SVG weather icons -->
-<svg width="56" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="blur" x="-.19471" y="-.26087" width="1.3744" height="1.6884">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-      <feOffset dx="0" dy="4" result="offsetblur" />
-      <feComponentTransfer>
-        <feFuncA slope="0.05" type="linear" />
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-  </defs>
-  <g transform="translate(16,-2)" filter="url(#blur)">
-    <g transform="matrix(.8 0 0 .8 16 4)">
-      <g class="am-weather-moon-star-1">
-        <polygon points="1.5 3.3 2.7 2.7 3.3 1.5 4 2.7 5.2 3.3 4 4 3.3 5.2 2.7 4" fill="#ffa500"
-          stroke-miterlimit="10" />
-      </g>
-      <g class="am-weather-moon-star-2">
-        <polygon transform="translate(20,10)" points="1.5 3.3 2.7 2.7 3.3 1.5 4 2.7 5.2 3.3 4 4 3.3 5.2 2.7 4"
-          fill="#ffa500" stroke-miterlimit="10" />
-      </g>
-      <g class="am-weather-moon">
-        <path
-          d="m14.5 13.2c0-3.7 2-6.9 5-8.7-1.5-0.9-3.2-1.3-5-1.3-5.5 0-10 4.5-10 10s4.5 10 10 10c1.8 0 3.5-0.5 5-1.3-3-1.7-5-5-5-8.7z"
-          fill="#ffa500" stroke="#ffa500" stroke-linejoin="round" stroke-width="2" />
-      </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Keyshape -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 64 64" style="white-space: pre;">
+    <style>
+@keyframes a0_t { 0% { transform: translate(41.4617px,26.8779px) scale(1,1) translate(-14.7px,-14.7px); animation-timing-function: cubic-bezier(0.86,0,0.07,1); } 50% { transform: translate(41.4617px,26.8779px) scale(0.7,0.7) translate(-14.7px,-14.7px); animation-timing-function: cubic-bezier(0.86,0,0.07,1); } 100% { transform: translate(41.4617px,26.8779px) scale(1,1) translate(-14.7px,-14.7px); } }
+@keyframes a1_t { 0% { transform: translate(41.4617px,26.8779px) rotate(0deg) translate(-14.7px,-14.7px); } 100% { transform: translate(41.4617px,26.8779px) rotate(360deg) translate(-14.7px,-14.7px); } }
+@keyframes a1_o { 0% { opacity: 1; animation-timing-function: cubic-bezier(0.445,0.05,0.55,0.95); } 50% { opacity: 0.2; animation-timing-function: cubic-bezier(0.445,0.05,0.55,0.95); } 100% { opacity: 1; } }
+@keyframes a2_t { 0% { transform: translate(8.010782px,17.5979px); animation-timing-function: cubic-bezier(0.445,0.05,0.55,0.95); } 50% { transform: translate(8.010782px,11.5979px); animation-timing-function: cubic-bezier(0.445,0.05,0.55,0.95); } 100% { transform: translate(8.010782px,17.5979px); } }
+    </style>
+    <g transform="translate(26.7617,12.1779)">
+        <ellipse fill="#FFCE55" rx="8.7" ry="8.7" transform="translate(0,0) translate(14.7,14.7)"/>
     </g>
-    <g class="am-weather-cloud-1">
-      <path transform="translate(-20,-11)"
-        d="m47.7 35.4c0-4.6-3.7-8.2-8.2-8.2-1 0-1.9 0.2-2.8 0.5-0.3-3.4-3.1-6.2-6.6-6.2-3.7 0-6.7 3-6.7 6.7 0 0.8 0.2 1.6 0.4 2.3-0.3-0.1-0.7-0.1-1-0.1-3.7 0-6.7 3-6.7 6.7 0 3.6 2.9 6.6 6.5 6.7h17.2c4.4-0.5 7.9-4 7.9-8.4z"
-        fill="#c6deff" stroke="#fff" stroke-linejoin="round" stroke-width="1.2" />
+    <g transform="translate(41.4617,26.8779) translate(-14.7,-14.7)" style="animation: 3s linear infinite both a0_t;">
+        <ellipse fill="#FFAF57" rx="5.7" ry="5.7" transform="translate(0,0) translate(14.7,14.7)"/>
     </g>
-  </g>
+    <g opacity="1" transform="translate(41.4617,26.8779) translate(-14.7,-14.7)" style="animation: 3s linear infinite both a1_t, 3s linear infinite both a1_o;">
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(14.7,1.7)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(14.7,27.7)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(1.7,14.7)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(27.7,14.7)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(5.5,5.5)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(23.9,23.9)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(5.5,23.9)"/>
+        <ellipse fill="#FFCE55" rx="1.7" ry="1.7" transform="translate(0,0) translate(23.9,5.5)"/>
+    </g>
+    <path fill="#EBF2F2" d="M32.1,14.2C32.1,14.2,32,14.2,32,14.2C31.1,6.2,24.3,0,16,0C7.2,0,0,7.2,0,16C0,24.8,7.2,32,16,32L32,32C36.9,32,40.9,28,40.9,23.1C41,18.2,37,14.2,32.1,14.2Z" transform="translate(28.4617,33.5979) translate(-20.4509,-16)" style="animation: 3s linear infinite both a2_t;"/>
 </svg>
