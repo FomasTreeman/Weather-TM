@@ -70,6 +70,7 @@ async function handleSubmit(e) {
   details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
   details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
   hide("#results", false);
+  hide("#week", false);
   hide("#autocomplete");
   hide("#postcodeForm");
   document.querySelector("header > button").innerHTML = postcode;
@@ -193,7 +194,7 @@ async function renderWorldWeather() {
   for (let [index, [key, value]] of Object.entries(
     Object.entries(randomCities)
   )) {
-    const li = `<li class="card city text-center flex__col"> ${key} </li>`;
+    const li = `<li class="card city text-center flex__col flex-end"> ${key} </li>`;
     global.innerHTML += li;
     console.log(key, value, index);
     await renderWeather(

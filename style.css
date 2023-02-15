@@ -8,7 +8,7 @@
 
 body {
   background-color: #292e2d;
-  color: #d1bd9e;  
+  color: #d1bd9e;
   margin: 1.5em;
 }
 
@@ -107,6 +107,10 @@ body {
   margin-inline: auto;
 }
 
+.center-lg {
+  max-width: 40rem;
+}
+
 /* * SPECIFIC PRIMITIVES */
 
 #curr_temp {
@@ -127,6 +131,10 @@ body {
   margin: 0.5em;
 }
 
+#global > * :first-child {
+  margin-top: auto;
+}
+
 #global > * img {
   padding-top: 1em;
 }
@@ -134,7 +142,6 @@ body {
 #global > * p {
   margin: 0;
 }
-
 
 #week {
   padding: 0;
