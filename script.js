@@ -298,6 +298,8 @@ function populateDaysOfWeek(postcode, weathercodes, temperatures) {
   const weekElement = document.getElementById("week").children;
   const weekElementList = Array.from(weekElement);
   weekElementList.forEach((parentElement, index) => {
+    console.log(parentElement.innerText.slice(0, 3));
+    parentElement.innerHTML = parentElement.innerText.slice(0, 3);
     createWeatherInformation(weathercodes[index], temperatures[index]).forEach(
       (childElement) => {
         parentElement.appendChild(childElement);
