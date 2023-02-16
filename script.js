@@ -28,10 +28,14 @@ async function fetchWeather(postcode) {
     let params = new URLSearchParams(url.search);
     params.append("current_weather", true);
     params.append("timezone", "GMT");
+    params.append("daily", "weathercode");
     params.append("daily", "precipitation_sum");
     params.append("daily", "windspeed_10m_max");
     params.append("daily", "apparent_temperature_max");
     params.append("hourly", "relativehumidity_2m");
+    params.append("hourly", "temperature_2m");
+    params.append("hourly", "precipitation");
+    params.append("hourly", "windspeed_10m");
 
     const response = await fetch(url + params);
     const json = await response.json();
@@ -113,6 +117,12 @@ async function handleSubmit(e) {
     "Precipitation: " + json.daily.precipitation_sum[0] + "mm";
   details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
   details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
+  populateDaysOfWeek(
+    postcode,
+    json.daily.weathercode,
+    json.daily.apparent_temperature_max
+  );
+  renderChart(json);
   hide("#results", false);
   hide("#week", false);
   hide("#autocomplete");
@@ -187,105 +197,108 @@ async function renderWorldWeather() {
   for (let [index, [key, value]] of Object.entries(
     Object.entries(randomCities)
   )) {
-    const li = `<li class="card city text-center flex__col"> <p> ${key} </p> </li>`;
+    const li = `<li class="card city text-center flex flex__col"> <p> ${key} </p> </li>`;
     global.innerHTML += li;
     await renderWeatherInformation(
       value,
-      createDailySummaryElements,
+      createCurrentWeather,
       global.children[index]
     );
   }
 }
 
-function renderChart() {
-  console.log("rendering");
-  const data = new google.visualization.DataTable();
-  data.addColumn("string", "Temperature");
-  data.addColumn("number", "Hour");
-  data.addColumn({ type: "string", role: "annotation" });
-  data.addRows([
-    ["00:00", 2.7, null],
-    ["01:00", 3.2, "a"],
-    ["02:00", 3.4, null],
-    ["03:00", 4.5, "a"],
-    ["04:00", 4.6, null],
-    ["05:00", 5.1, "a"],
-    ["06:00", 5.1, null],
-    ["07:00", 4.8, "a"],
-    ["08:00", 4.8, null],
-    ["09:00", 4.9, "a"],
-    ["10:00", 5.0, null],
-    ["11:00", 5.1, "a"],
-    ["12:00", 5.2, null],
-    ["13:00", 5.3, "a"],
-    ["14:00", 5.1, null],
-    ["15:00", 4.9, "a"],
-    ["16:00", 4.7, null],
-    ["18:00", 4.6, "a"],
-    ["19:00", 4.5, null],
-    ["20:00", 4.3, "a"],
-    ["21:00", 3.7, null],
-    ["22:00", 3.6, "a"],
-    ["23:00", 3.5, null],
-  ]);
+const renderChart = (json) => {
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    console.log("rendering");
+    const data = new google.visualization.DataTable();
+    data.addColumn("string", "Hour");
+    data.addColumn("number", "Temperature");
+    data.addColumn({ type: "number", role: "annotation" });
+    let rows = [];
+    for (let i = 0; i < 24; i++) {
+      const value = Math.floor(json.hourly.temperature_2m[i]);
+      rows.push([
+        `${i < 10 ? "0" + i : i}:00`,
+        value,
+        i % 2 == 0 ? null : value,
+      ]);
+    }
+    console.log(rows);
+    data.addRows(rows);
 
-  const textColour = getComputedStyle(
-    document.documentElement
-  ).getPropertyValue("--text-colour");
-  console.log(textColour);
+    const textColour = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--text-colour");
+    console.log(textColour);
 
-  let options = {
-    // forceIFrame: true,
-    width: 327,
-    height: 130,
-    backgroundColor: "transparent",
-    colors: ["orange"],
-    annotations: {
-      stemColor: "none",
-      textStyle: {
-        color: "#d1bd9e",
+    let options = {
+      // forceIFrame: true,
+      width: 327,
+      height: 130,
+      backgroundColor: "transparent",
+      colors: ["orange"],
+      annotations: {
+        stemColor: "none",
+        textStyle: {
+          color: "#d1bd9e",
+        },
       },
-    },
-    vAxis: {
-      minValue: 0,
-      gridlines: {
-        color: "transparent",
+      vAxis: {
+        minValue: 0,
+        gridlines: {
+          color: "transparent",
+        },
+        textStyle: {
+          color: "none",
+        },
       },
-      textStyle: {
-        color: "none",
+      hAxis: {
+        showTextEvery: 4,
+        textStyle: {
+          // ! cant use variable text-colour ?
+          color: `#d1bd9e`,
+        },
       },
-    },
-    hAxis: {
-      showTextEvery: 4,
-      textStyle: {
-        // ! cant use variable text-colour ?
-        color: `#d1bd9e`,
-      },
-    },
-    legend: "none",
-  };
+      legend: "none",
+    };
 
-  let chart = new google.visualization.AreaChart(
-    document.getElementById("chart_div")
-  );
-  chart.draw(data, options);
-}
+    let chart = new google.visualization.AreaChart(
+      document.getElementById("chart_div")
+    );
+    chart.draw(data, options);
+  }
+};
 
 // * ------------- data manipulation
-const createDailySummaryElements = (json) => {
-  // (json)
+const createWeatherInformation = (weathercode, temperature) => {
   const iframe = document.createElement("iframe");
-  iframe.src = `./icons/weather-codes/${json.current_weather.weathercode}.svg`;
+  iframe.src = `./icons/weather-codes/${weathercode}.svg`;
   iframe.alt = "weatherIcon";
   const p = document.createElement("p");
-  p.innerText = json.current_weather.temperature + "°";
+  p.innerText = temperature + "°";
   return [iframe, p];
 };
 
-// TODO
-function populateDaysOfWeek() {
-  const weekElement = doucment.getElementById("#week");
-  console.log(Array.from(weekElement));
+const createCurrentWeather = (json) => {
+  return createWeatherInformation(
+    json.current_weather.weathercode,
+    json.current_weather.temperature
+  );
+};
+
+function populateDaysOfWeek(postcode, weathercodes, temperatures) {
+  const weekElement = document.getElementById("week").children;
+  const weekElementList = Array.from(weekElement);
+  console.log(weekElementList);
+  weekElementList.forEach((parentElement, index) => {
+    createWeatherInformation(weathercodes[index], temperatures[index]).forEach(
+      (childElement) => {
+        parentElement.appendChild(childElement);
+      }
+    );
+  });
 }
 
 // * --------------- class togglers
@@ -320,5 +333,3 @@ function showError(error) {
 document.addEventListener("click", handleClick);
 renderWorldWeather();
 navigator.geolocation.getCurrentPosition(handlePosition, showError);
-google.charts.load("current", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(renderChart);
