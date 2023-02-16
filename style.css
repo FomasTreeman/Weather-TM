@@ -17,12 +17,6 @@ body {
   font-family: "Poppins";
 }
 
-* :focus {
-  border: blue !important;
-  border-style: dotted !important;
-  border-width: 2px !important;
-}
-
 iframe {
   border: none;
   max-width: 8rem;
