@@ -1,4 +1,7 @@
 // * ------------- fetchers
+let weatherFetches = 0;
+let fetches = 0;
+
 async function fetchResult(
   url,
   init,
@@ -22,6 +25,8 @@ async function fetchWeather(postcode) {
     const { longitude, latitude } = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}`
     );
+    weatherFetches++;
+
     let url = new URL(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`
     );
@@ -42,7 +47,7 @@ async function fetchWeather(postcode) {
     return json;
   } catch (error) {
     // TODO improve error handling to give user feedback
-    console.error(error);
+    console.alert(error);
   }
 }
 
@@ -64,6 +69,7 @@ async function fetchPostcode(latitude, longitude) {
     headers: { "content-type": "application/json" },
   });
   if (!result[0].result) return null;
+
   return result[0].result[0].postcode;
 }
 
@@ -79,6 +85,7 @@ async function fetchAndRenderSuggestion(inputElement) {
       undefined,
       handleNoResult
     );
+
     const ulElement = document.querySelector("#autocomplete");
     ulElement.innerHTML = "";
     result.forEach((element) => {
@@ -92,7 +99,7 @@ async function fetchAndRenderSuggestion(inputElement) {
     });
     hide("#autocomplete", false);
   } catch (error) {
-    console.error(error);
+    console.alert(error);
   }
 }
 
@@ -225,7 +232,6 @@ const renderChart = (json) => {
         i % 2 == 0 ? null : value,
       ]);
     }
-    console.log(rows);
     data.addRows(rows);
 
     const textColour = getComputedStyle(
@@ -291,7 +297,6 @@ const createCurrentWeather = (json) => {
 function populateDaysOfWeek(postcode, weathercodes, temperatures) {
   const weekElement = document.getElementById("week").children;
   const weekElementList = Array.from(weekElement);
-  console.log(weekElementList);
   weekElementList.forEach((parentElement, index) => {
     createWeatherInformation(weathercodes[index], temperatures[index]).forEach(
       (childElement) => {
@@ -321,7 +326,12 @@ async function handlePosition(location) {
   const postcode = await fetchPostcode(...ll);
   if (postcode) {
     // document.querySelector("input[type=text]").value = postcode;
-    handleSubmit(postcode);
+    renderProcessLoading("Rendering local weather ...");
+    await handleSubmit(postcode);
+    renderProcessLoading("Finished");
+    // 380 is fixed width of inside ladoing screen, 100 is fixed increment (percetnage of number of process)
+    renderLoadingBar(380 - 100);
+    setTimeout(() => toggle("#loading"), 500);
   }
 }
 
@@ -329,7 +339,30 @@ function showError(error) {
   console.error("getCurrentPosition returned error", error);
 }
 
+// * ---------------- loading
+async function loading() {
+  // const loadingElement = document.getElementById("loading");
+  let total = 1;
+  document.addEventListener("click", handleClick);
+  renderProcessLoading("Rendering world weather ...");
+  total = renderLoadingBar(total);
+  await renderWorldWeather();
+  renderProcessLoading("Getting your location ...");
+  total = renderLoadingBar(total);
+  navigator.geolocation.getCurrentPosition(handlePosition, showError);
+}
+
+const renderLoadingBar = (total) => {
+  let increment = 100;
+  const value = total + increment;
+  document.querySelector("hr").style.width = value + "px";
+  return value;
+};
+
+const renderProcessLoading = (process) => {
+  const pElement = document.getElementById("processing");
+  pElement.innerHTML = process;
+};
+
 // ? on reload
-document.addEventListener("click", handleClick);
-renderWorldWeather();
-navigator.geolocation.getCurrentPosition(handlePosition, showError);
+loading();

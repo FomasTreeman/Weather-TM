@@ -119,6 +119,21 @@ iframe {
 
 /* * SPECIFIC PRIMITIVES */
 
+/* .blur {
+  filter: blur(4px);
+} */
+
+.loading {
+  padding: 3rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -15rem;
+  top: 50%;
+  margin-top: -15rem;
+  z-index: 20;
+  width: 30rem;
+}
+
 #curr_temp {
   font-size: xx-large;
 }
@@ -192,6 +207,11 @@ iframe {
 li {
   list-style: none;
   padding: 0;
+}
+
+hr {
+  width: 0px;
+  margin: 0%;
 }
 
 header > button {

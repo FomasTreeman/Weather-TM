@@ -8,13 +8,18 @@
         <link rel="stylesheet" href="style.css">
         <title>Weather app</title>
     </head>
-    <body>
+    <body class="blur">
         <header class="flex space-between">
             <h1> Weather </h1>
             <button onclick="handlePostcodeFormSubmit(event)"> Postcode
             </button>
         </header>
         <main class="stack">
+            <article id="loading" class="card loading ">
+                <h2> Loading ... </h2>
+                <hr>
+                <p id="processing"> Processing ... </p>
+            </article>
             <section>
                 <form id="postcodeForm" action="" onsubmit="handleSubmit(event)"
                     class="center card hidden">
