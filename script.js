@@ -22,10 +22,10 @@ async function fetchWeather(postcode) {
     const validateResult = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}/validate`
     );
+    // if (validateResult.status != 200) throw new Error("Invalid postcode");
     const { longitude, latitude } = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}`
     );
-    weatherFetches++;
 
     let url = new URL(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`
@@ -44,10 +44,11 @@ async function fetchWeather(postcode) {
 
     const response = await fetch(url + params);
     const json = await response.json();
+    fetches++;
     return json;
   } catch (error) {
     // TODO improve error handling to give user feedback
-    console.alert(error);
+    alert(error);
   }
 }
 
@@ -85,7 +86,6 @@ async function fetchAndRenderSuggestion(inputElement) {
       undefined,
       handleNoResult
     );
-
     const ulElement = document.querySelector("#autocomplete");
     ulElement.innerHTML = "";
     result.forEach((element) => {
@@ -99,7 +99,7 @@ async function fetchAndRenderSuggestion(inputElement) {
     });
     hide("#autocomplete", false);
   } catch (error) {
-    console.alert(error);
+    alert(error);
   }
 }
 
@@ -125,7 +125,6 @@ async function handleSubmit(e) {
   details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
   details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
   populateDaysOfWeek(
-    postcode,
     json.daily.weathercode,
     json.daily.apparent_temperature_max
   );
@@ -192,7 +191,6 @@ async function renderWeatherInformation(postcode, elements, parent) {
 }
 
 async function renderWorldWeather() {
-  const cityElements = document.getElementsByClassName("city");
   let randomCities = {};
   for (let i = 0; i < 4; i++) {
     const result = await fetchResult(
@@ -288,17 +286,17 @@ const createWeatherInformation = (weathercode, temperature) => {
 };
 
 const createCurrentWeather = (json) => {
+  console.log(json);
   return createWeatherInformation(
     json.current_weather.weathercode,
     json.current_weather.temperature
   );
 };
 
-function populateDaysOfWeek(postcode, weathercodes, temperatures) {
+function populateDaysOfWeek(weathercodes, temperatures) {
   const weekElement = document.getElementById("week").children;
   const weekElementList = Array.from(weekElement);
   weekElementList.forEach((parentElement, index) => {
-    console.log(parentElement.innerText.slice(0, 3));
     parentElement.innerHTML = parentElement.innerText.slice(0, 3);
     createWeatherInformation(weathercodes[index], temperatures[index]).forEach(
       (childElement) => {
