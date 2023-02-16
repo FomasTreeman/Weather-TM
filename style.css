@@ -17,6 +17,12 @@ body {
   font-family: "Poppins";
 }
 
+* :focus {
+  border: blue !important;
+  border-style: dotted !important;
+  border-width: 2px !important;
+}
+
 iframe {
   border: none;
   max-width: 8rem;
@@ -124,14 +130,14 @@ iframe {
 } */
 
 .loading {
-  padding: 3rem;
-  position: absolute;
-  left: 50%;
-  margin-left: -15rem;
-  top: 50%;
-  margin-top: -15rem;
+  position: fixed;
+  background-color: rgb(32, 32, 32);
+  width: 80vw;
+  left: 50vw;
+  margin-left: -40vw;
+  margin-top: -5vh;
+  padding: 7vw;
   z-index: 20;
-  width: 30rem;
 }
 
 #curr_temp {
