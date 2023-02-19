@@ -22,10 +22,10 @@ async function fetchWeather(postcode) {
     const validateResult = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}/validate`
     );
+    if (!validateResult) throw new Error("Invalid postcode");
     const { longitude, latitude } = await fetchResult(
       `https://api.postcodes.io/postcodes/${postcode}`
     );
-    weatherFetches++;
 
     let url = new URL(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}`
@@ -44,10 +44,11 @@ async function fetchWeather(postcode) {
 
     const response = await fetch(url + params);
     const json = await response.json();
+    fetches++;
     return json;
   } catch (error) {
     // TODO improve error handling to give user feedback
-    console.alert(error);
+    alert(error);
   }
 }
 
@@ -75,17 +76,19 @@ async function fetchPostcode(latitude, longitude) {
 
 async function fetchAndRenderSuggestion(inputElement) {
   let searchValue = inputElement.target.value.trim();
+  const inputEl = document.getElementById("postcode");
   try {
+    inputEl.classList.remove("error");
     const handleNoResult = () => {
       hide("#autocomplete");
-      throw new Error("starting characters have no similar postcodes");
+
+      // throw new Error("starting characters have no similar postcodes");
     };
     const result = await fetchResult(
       `https://api.postcodes.io/postcodes/${searchValue}/autocomplete`,
       undefined,
       handleNoResult
     );
-
     const ulElement = document.querySelector("#autocomplete");
     ulElement.innerHTML = "";
     result.forEach((element) => {
@@ -99,7 +102,8 @@ async function fetchAndRenderSuggestion(inputElement) {
     });
     hide("#autocomplete", false);
   } catch (error) {
-    console.alert(error);
+    inputEl.classList.add("error");
+    console.log("invalid input");
   }
 }
 
@@ -125,7 +129,6 @@ async function handleSubmit(e) {
   details[1].innerHTML = "Windspeed: " + json.current_weather.windspeed + "kmh";
   details[2].innerHTML = "Humidity: " + Math.floor(humidityAvg) + "%";
   populateDaysOfWeek(
-    postcode,
     json.daily.weathercode,
     json.daily.apparent_temperature_max
   );
@@ -165,7 +168,9 @@ const renderImage = (weatherCode) => {
   const insertIFRAME = () => {
     const iframe = document.createElement("iframe");
     iframe.src = `./icons/weather-codes/${weatherCode}.svg`;
-    iframe.alt = "weatherIcon";
+    iframe.title = "WeatherIcon";
+    iframe.ariaHidden = "true";
+    iframe.tabIndex = "-1";
     sectionElement.insertBefore(iframe, currTemp);
   };
   // lots of nesting but seemed most efficient after diffrent refatoring attempts
@@ -192,7 +197,6 @@ async function renderWeatherInformation(postcode, elements, parent) {
 }
 
 async function renderWorldWeather() {
-  const cityElements = document.getElementsByClassName("city");
   let randomCities = {};
   for (let i = 0; i < 4; i++) {
     const result = await fetchResult(
@@ -281,7 +285,9 @@ const renderChart = (json) => {
 const createWeatherInformation = (weathercode, temperature) => {
   const iframe = document.createElement("iframe");
   iframe.src = `./icons/weather-codes/${weathercode}.svg`;
-  iframe.alt = "weatherIcon";
+  iframe.title = "weatherIcon";
+  iframe.ariaHidden = "true";
+  iframe.tabIndex = "-1";
   const p = document.createElement("p");
   p.innerText = temperature + "°";
   return [iframe, p];
@@ -294,10 +300,11 @@ const createCurrentWeather = (json) => {
   );
 };
 
-function populateDaysOfWeek(postcode, weathercodes, temperatures) {
+function populateDaysOfWeek(weathercodes, temperatures) {
   const weekElement = document.getElementById("week").children;
   const weekElementList = Array.from(weekElement);
   weekElementList.forEach((parentElement, index) => {
+    parentElement.innerHTML = parentElement.innerText.slice(0, 3);
     createWeatherInformation(weathercodes[index], temperatures[index]).forEach(
       (childElement) => {
         parentElement.appendChild(childElement);
@@ -330,8 +337,11 @@ async function handlePosition(location) {
     await handleSubmit(postcode);
     renderProcessLoading("Finished");
     // 380 is fixed width of inside ladoing screen, 100 is fixed increment (percetnage of number of process)
-    renderLoadingBar(380 - 100);
-    setTimeout(() => toggle("#loading"), 500);
+    const loadingStyles = getComputedStyle(document.querySelector(".loading"));
+    const width = parseInt(loadingStyles.width.split("px")[0]);
+    // console.log(width - width / 3);
+    renderLoadingBar(width - width / 3);
+    setTimeout(() => toggle("#loading"), 300);
   }
 }
 
@@ -353,7 +363,8 @@ async function loading() {
 }
 
 const renderLoadingBar = (total) => {
-  let increment = 100;
+  const loadingStyles = getComputedStyle(document.querySelector(".loading"));
+  let increment = parseInt(loadingStyles.width.split("px")[0]) / 6;
   const value = total + increment;
   document.querySelector("hr").style.width = value + "px";
   return value;
