@@ -104,6 +104,14 @@ iframe {
   display: none;
 }
 
+.error {
+  border: red;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 5px;
+  animation: shake 0.5s;
+}
+
 .text-center {
   text-align: center;
 }
@@ -249,4 +257,18 @@ header > button {
 
 .autocomplete li > button:hover {
   color: blanchedalmond;
+}
+
+/* ? || ANIMATION || */
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  50% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
 }

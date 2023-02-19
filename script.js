@@ -76,7 +76,9 @@ async function fetchPostcode(latitude, longitude) {
 
 async function fetchAndRenderSuggestion(inputElement) {
   let searchValue = inputElement.target.value.trim();
+  const inputEl = document.getElementById("postcode");
   try {
+    inputEl.classList.remove("error");
     const handleNoResult = () => {
       hide("#autocomplete");
 
@@ -100,7 +102,8 @@ async function fetchAndRenderSuggestion(inputElement) {
     });
     hide("#autocomplete", false);
   } catch (error) {
-    alert(error);
+    inputEl.classList.add("error");
+    console.log("invalid input");
   }
 }
 
@@ -336,7 +339,7 @@ async function handlePosition(location) {
     // 380 is fixed width of inside ladoing screen, 100 is fixed increment (percetnage of number of process)
     const loadingStyles = getComputedStyle(document.querySelector(".loading"));
     const width = parseInt(loadingStyles.width.split("px")[0]);
-    console.log(width - width / 3);
+    // console.log(width - width / 3);
     renderLoadingBar(width - width / 3);
     setTimeout(() => toggle("#loading"), 300);
   }
