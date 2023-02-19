@@ -1,6 +1,7 @@
 # Weather-TM
 ---
 
+This Weather app is for giving hourly and daily weather for a given postcode. We also want to give the user suggestions of postcodes to have fun and see the weather information for random postcodes within the UK. There is also 4 random cities selected every refresh, for fun :)
 
 ## User Story
 
