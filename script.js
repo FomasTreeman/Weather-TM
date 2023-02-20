@@ -346,7 +346,12 @@ async function handlePosition(location) {
 }
 
 function showError(error) {
-  console.error("getCurrentPosition returned error", error);
+  toggle("#loading");
+  alert(
+    `Location permission is denied. 
+If you wish to accept location services in chrome, to the left of the url, there is a "i" icon, when you click on this you should be able to toggle location permission`
+  );
+  console.log("getCurrentPosition returned error", error);
 }
 
 // * ---------------- loading
@@ -360,6 +365,7 @@ async function loading() {
   renderProcessLoading("Getting your location ...");
   total = renderLoadingBar(total);
   navigator.geolocation.getCurrentPosition(handlePosition, showError);
+  setTimeout;
 }
 
 const renderLoadingBar = (total) => {
