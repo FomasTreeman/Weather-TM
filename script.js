@@ -79,11 +79,11 @@ async function fetchAndRenderSuggestion(inputElement) {
   const inputEl = document.getElementById("postcode");
   try {
     inputEl.classList.remove("error");
+    console.log(searchValue);
     const handleNoResult = () => {
       hide("#autocomplete");
-
-      // throw new Error("starting characters have no similar postcodes");
     };
+    if (searchValue == "") return handleNoResult();
     const result = await fetchResult(
       `https://api.postcodes.io/postcodes/${searchValue}/autocomplete`,
       undefined,
