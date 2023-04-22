@@ -2,29 +2,11 @@
 
 This Weather app is for giving hourly and daily weather for a given postcode. We also want to give the user suggestions of postcodes to have fun and see the weather information for random postcodes within the UK. There is also 4 random cities selected every refresh, for fun :)
 
-## User Story
+## Featrues
 
-As a user i want to be able to..
-
-- [ ] See an interesting mashup of different data
-- [x] Input information to change the displayed result
-- [ ] View the app on all of my devices
-
-
-## Stretch stories 
-
-- [ ] As an impatient user, I want to see some indication that data is loading
-- [ ] As a confused user, I want to be told when something goes wrong
-
-
-## Acceptance Criteria 
-
-- [x] Query at least two APIs using fetch
-- [x] Dynamic content generated with JS
-- [ ] A clearly defined user journey, documented in your readme
-- [ ] A responsive, mobile-first design
-- [ ] Ensure your app is accessible to as many different users as possible
-
+-
+-
+-
 
 ## Inspiration
 
